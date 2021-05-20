@@ -6,12 +6,10 @@ import sys
 import time
 import datetime
 import os
-
 import requests
 from bs4 import BeautifulSoup
 
 import Config
-
 
 
 class Utils(object):
@@ -39,7 +37,6 @@ class Utils(object):
             return date.replace(year=date_today.year, month=date_today.month, day=date_today.day)
         else:
             return datetime.date.today()
-
 
 
 class Main(object):
@@ -76,17 +73,16 @@ class Main(object):
 
             def urlList(page_number):
                 num_in_url = str(page_number * 50)
-                douban_url = ['https://www.douban.com/group/search?start=' + num_in_url +'&group=146409&cat=1013&sort=time&q=',
-                              'https://www.douban.com/group/search?start=' + num_in_url +'&group=523355&cat=1013&sort=time&q=',
-                              'https://www.douban.com/group/search?start=' + num_in_url +'&group=557646&cat=1013&sort=time&q=',
-                              'https://www.douban.com/group/search?start=' + num_in_url +'&group=383972&cat=1013&sort=time&q=',
-                              'https://www.douban.com/group/search?start=' + num_in_url +'&group=283855&cat=1013&sort=time&q=',
-                              'https://www.douban.com/group/search?start=' + num_in_url +'&group=76231&cat=1013&sort=time&q=',
-                              'https://www.douban.com/group/search?start=' + num_in_url +'&group=196844&cat=1013&sort=time&q=',
-                              'https://www.douban.com/group/search?start=' + num_in_url +'&group=259227&cat=1013&sort=time&q=']
+                douban_url = ['https://www.douban.com/group/search?start=' + num_in_url +'&group=117205&cat=1013&sort=time&q=',
+                              'https://www.douban.com/group/search?start=' + num_in_url +'&group=620816&cat=1013&sort=time&q=',
+                              'https://www.douban.com/group/search?start=' + num_in_url +'&group=204903&cat=1013&sort=time&q=',
+                              'https://www.douban.com/group/search?start=' + num_in_url +'&group=343477&cat=1013&sort=time&q=',
+                              'https://www.douban.com/group/search?start=' + num_in_url +'&group=551196&cat=1013&sort=time&q=',
+                              'https://www.douban.com/group/search?start=' + num_in_url +'&group=632032&cat=1013&sort=time&q=',
+                              'https://www.douban.com/group/search?start=' + num_in_url +'&group=549038&cat=1013&sort=time&q=']
                 return douban_url
-            douban_url_name = [u'上海租房', u'上海招聘，租房', u'上海租房(2)', u'上海合租族_魔都租房', u'上海租房@浦东租房', \
-                               u'上海租房---房子是租来的，生活不是', u'上海租房@长宁租房/徐汇/静安租房', u'上海租房（不良中介勿扰）']
+            douban_url_name = [u'成都租房', u'成都租房|成都高新区租房', u'成都租房', u'成都租房', u'成都租房', \
+                               u'成都租房合租【拒绝包租中介】', u'成都租房【好评★★★★★】']
 
             def crawl(i, douban_url, keyword, douban_headers):
                 url_link = douban_url[i] + keyword
@@ -146,7 +142,6 @@ class Main(object):
                     print 'request url error %s -status code: %s:' % (url_link, r.status_code)
                 time.sleep(self.config.douban_sleep_time)
 
-
             print 'The spider begins to work...  爬虫开始运行...'
 
             douban_url = urlList(0)
@@ -182,11 +177,11 @@ class Main(object):
                 file.write('''<html>
                     <head>
                     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-                    <title>上海租房信息 | 豆瓣</title>
+                    <title>成都租房信息 | 豆瓣</title>
                     <link rel="stylesheet" type="text/css" href="../lib/resultPage.css">
                     </head>
                     <body>''')
-                file.write('<h1>Shanghai Renting Information 上海租房信息 | </h1>')
+                file.write('<h1>ChengDu Renting Information 成都租房信息 | </h1>')
                 file.write('''
                     <a href="https://www.douban.com/" target="_black">
                     <img src="https://img3.doubanio.com/f/shire/8977fa054324c4c7f565447b003ebf75e9b4f9c6/pics/nav/lg_main@2x.png" alt="豆瓣icon"/>
@@ -225,7 +220,6 @@ class Main(object):
             print '结果文件写入完毕。请打开"' + result_file_name + '.html"查看结果。'
 
 
-
 class Spider(object):
     def __init__(self):
         this_file_dir = os.path.split(os.path.realpath(__file__))[0]
@@ -241,7 +235,6 @@ class Spider(object):
     def run(self):
         main = Main(self.config)
         main.run()
-
 
 
 if __name__ == '__main__':
